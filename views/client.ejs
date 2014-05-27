@@ -1,0 +1,96 @@
+<html>
+    <title>WebSocket Client Demo [socket.io]</title>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="jquery/dist/jquery.min.js"></script>
+    <script>
+
+    var socket;
+    var id = 0;
+    $( document ).ready( function(){
+        
+        socket = io.connect('http://' + location.host);
+        
+        socket.on('generatedCheckin', function (data) {
+            console.log(data);
+        });
+        
+        socket.on('generatedAdminUser', function(data){
+            if( data ['id'] ){
+                id = data['id'];
+                console.log(id);
+            }
+            else
+                console.log(data);
+            
+        });
+
+        socket.on("updatedAdminUser", function(data){
+            console.log(data);
+        });
+
+        socket.on("deletedUser", function(data){
+            console.log(data);
+        });
+
+        socket.on('syncFromServer', function (data) {
+            console.log(data);
+        });
+
+    });
+
+    function addUser() {
+        try {
+            var data = {
+                id           : 0,
+                username     : "user-" + Math.random() * 100,
+                passwd       : "1 m3 m1n3",
+                name         : "jhon",
+                surname      : "doe",
+                picture      : null,
+                email        : "jhon@example.com",
+                address      : "Some where in la Mancha",
+                phone        : "0099102094312",
+                customerid   : 6
+            };
+            socket.emit("saveAdminUser", data);
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    function updUser() {
+        try {
+            var data = {
+                id           : id,
+                username     : "user-" + Math.random() * 100,
+                passwd       : "1 m3 m1n3",
+                name         : "jhon",
+                surname      : "doe",
+                picture      : null,
+                email        : "jhon@example.com",
+                address      : "Some where in la Argentina",
+                phone        : "0042424242",
+                customerid   : 6
+            };
+            socket.emit("updateAdminUser", data);
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+    }
+
+    function delUser(){
+        socket.emit("deleteUser", {'id': id});
+    }
+
+    </script>
+
+    <body>
+        <h1>WebSocket Client Demo</h1>
+        <button id="adduser" onclick='addUser()' />Add admin</button>
+        <button id="deluser" onclick='delUser()' />Delete admin</button>
+        <button id="upduser" onclick='updUser()' />Update admin</button>
+    </body>
+
+</html>
