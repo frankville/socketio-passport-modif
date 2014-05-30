@@ -56,10 +56,7 @@ var after = function _after(count, f) {
 
 // Hash password utility
 function generatePassword(str){
-    var passwd = crypto.createHash('sha256')
-                       .update(str, 'base64')
-                       .digest('hex')
-                       .slice(0,30);
+    var passwd = crypto.createHash('sha256').update(str, 'base64').digest('hex').slice(0,30);
     return passwd;
 }
 

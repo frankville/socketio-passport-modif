@@ -1,12 +1,12 @@
 {
-  "name": "webdashboard-server",
+  "name": "sio-auth",
   "version": "0.0.0",
-  "description": "servidor node para el webdashboard",
-  "main": "nodeserver.js",
+  "description": "Uwierzytelnianie w Socket.io za pomocą Passport.js",
+  "main": "serwer.js",
   "scripts": {
-    "start": "node nodeserver.js"
+    "start": "node serwer.js"
   },
-  "author": "Villasanti Francisco",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "connect": "^2.14.5",
@@ -16,5 +16,6 @@
 	"mysql": "*",
     "passport-local": "^1.0.0",
     "passport.socketio": "^3.0.1",
+    "ejs": "*"
   }
 }
