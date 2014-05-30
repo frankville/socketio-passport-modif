@@ -51,14 +51,34 @@ $(document).ready(function(){
 				console.log(data);
 		});
 	});
+
 	$("#branchForm").submit(function(event){
 		event.preventDefault();
-		socket.emit("saveBranch",function(data){
+		//b.name,b.phone,b.address,b.email,b.customerid
+		var branch = new Branch();
+		branch.name = $("#bname").val();
+		branch.surname = $("#bsurn").val();
+		branch.email = $("#bemail").val();
+		branch.phone = $("#bphone").val();
+		branch.address = $("#baddress").val();
+		branch.customerid = customerid;
+
+		socket.emit("saveBranch",branch,function(data){
 			console.log(data);
 		});
+
 	});
+	
 	$("#empForm").submit(function(event){
 		event.preventDefault();
+		var employee = new Employee();
+		employee.name = $("#ename").val();
+		employee.surname = $("#esurname").val();
+		employee.email = $("#eemail").val();
+		employee.phone = $("#ephone").val();
+		employee.address = $("#eaddress").val();
+		employee.customerid = customerid;
+
 		socket.emit("saveEmployee",function(data){
 			console.log(data);
 		});
