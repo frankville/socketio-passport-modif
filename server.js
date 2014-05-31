@@ -154,6 +154,7 @@ checkout    | checkout       (INT)
 
 // return workingtime row inserted
 function saveCheckin(socket, wt){
+    console.log(" valor del wt "+wt);
     db.query('INSERT INTO workingtime (empid,branchid,checkinpic,checkin,checkout,checkoutpic) VALUES (?,?,?,?,?,?)', 
                                                                     [wt.employee,wt.branchid,wt.captcheckin,wt.checkin,wt.captcheckout,wt.checkout],
     function (err, result){
@@ -695,5 +696,5 @@ io.sockets.on('connection', function (socket) {
 });
 
 server.listen(2012, function () {
-    console.log('Serwer pod adresem http://localhost:2012/');
+    console.log('Serwer pod adresem http://linode.dnsdynamic.com:2012/');
 });

@@ -92,6 +92,29 @@ function WorkingTime(){
   this.checkin = new Date();
   this.captcheckout = null;
   this.checkout = null;
+    this.branchid =0;
+}
+
+function Employee(){
+    this.cod = 0;
+    this.name = "";
+    this.surname ="";
+    this.email ="";
+    this.customerid=0;
+    this.phone =0;
+    this.address ="";
+}
+
+function Branch(){
+    this.name = "";
+    this.address ="";
+    this.phone = "";
+    this.email ="";
+}
+
+function BranchesPerAdmin(){
+    this.admin =0;
+    this.branch=0;
 }
 
 function performCheckin(data,employee){
@@ -101,8 +124,13 @@ function performCheckin(data,employee){
         var checkin = new WorkingTime();
   checkin.captcheckin = data;
   checkin.employee = employee;
+	checkin.branchid = 1;
+
   saveObject(checkin, "workingtime", function(data){
     console.log(data);
+      socket.emit("saveCheckin",checkin,function(resp){
+	  console.log(resp);
+      });
   })
 
   }else {
@@ -132,6 +160,9 @@ function performCheckout(capture, employee){
 
           updateObject(wt,cursor.key,function(data){
             console.log(data);
+	      socket.emit("saveCheckout",wt,function(resp){
+		  console.log(resp);
+	      });
           });
         }
         cursor.continue();

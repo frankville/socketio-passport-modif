@@ -12,7 +12,7 @@ $(document).ready(function(){
 		}else{
 			showMainPanel();
 			customerid = parseInt(cid);
-			socket = io.connect("http://localhost:2012");
+			socket = io.connect("http://linode.dnsdynamic.com:2012");
 			socket.on("connect", function(d){
 					listenToServer();
 			});
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		loginCred.password = $("#pwd").val();
 
 		$.post("/login", loginCred, function(cid){
-			socket = io.connect("http://localhost:2012");
+			socket = io.connect("http://linode.dnsdynamic.com:2012");
 			console.log(" el customerid de este usuario es "+cid);
 			customerid = parseInt(cid);
 			socket.on("connect", function(d){
@@ -72,6 +72,7 @@ $(document).ready(function(){
 	$("#empForm").submit(function(event){
 		event.preventDefault();
 		var employee = new Employee();
+	    employee.cod = $("#campo").val();
 		employee.name = $("#ename").val();
 		employee.surname = $("#esurname").val();
 		employee.email = $("#eemail").val();
@@ -79,11 +80,16 @@ $(document).ready(function(){
 		employee.address = $("#eaddress").val();
 		employee.customerid = customerid;
 
-		socket.emit("saveEmployee",function(data){
+
+	    socket.emit("saveEmployee",employee,function(data){
 			console.log(data);
 		});
 	});
-
+    $("#appPan").submit(function(event){
+	event.preventDefault();
+	var emp = $("#campo").val();
+	isACheckin(emp);
+    });
 
 	$("#logout").click(function(event){
 		event.preventDefault();
