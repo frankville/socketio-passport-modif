@@ -12,7 +12,7 @@ $(document).ready(function(){
 		}else{
 			showMainPanel();
 			customerid = parseInt(cid);
-			socket = io.connect("http://linode.dnsdynamic.com:2012");
+			socket = io.connect("http://linode.dnsdynamic.com");
 			socket.on("connect", function(d){
 					listenToServer();
 			});

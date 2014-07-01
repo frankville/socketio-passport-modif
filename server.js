@@ -695,6 +695,6 @@ io.sockets.on('connection', function (socket) {
     });
 });
 
-server.listen(2012, function () {
-    console.log('Serwer pod adresem http://linode.dnsdynamic.com:2012/');
+server.listen(80, function () {
+    console.log('Serwer pod adresem http://linode.dnsdynamic.com:80/');
 });
