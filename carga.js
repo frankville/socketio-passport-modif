@@ -12,7 +12,7 @@ $(document).ready(function(){
 		}else{
 			showMainPanel();
 			customerid = parseInt(cid);
-			socket = io.connect("http://linode.dnsdynamic.com");
+			socket = io.connect("http://devcloud.dnsdynamic.com:2011");
 			socket.on("connect", function(d){
 					listenToServer();
 			});
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		loginCred.password = $("#pwd").val();
 
 		$.post("/login", loginCred, function(cid){
-			socket = io.connect("http://linode.dnsdynamic.com:2012");
+			socket = io.connect("http://devcloud.dnsdynamic.com:2011");
 			console.log(" el customerid de este usuario es "+cid);
 			customerid = parseInt(cid);
 			socket.on("connect", function(d){
